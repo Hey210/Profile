@@ -180,21 +180,472 @@
             <a href="https://mail.google.com/mail/?view=cm&to=kael.official20@gmail.com" target="_blank">Email</a>
             <a href="tel:+639910664966"> Number</a>
         </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffffff;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .profile-container {
+            text-align: center;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .profile-image-container {
+            margin-right: 20px;
+            width: 120px;
+            height: 120px;
+            border-radius: 1%;
+            overflow: hidden;
+            border: 2px;
+            box-shadow: 0 4px 15px rgba(10, 0, 0, 0.1);
+        }
+
+        .profile-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10%;
+            pointer-events: none; /* Prevent click */
+            user-select: none; /* Disable selection */
+            -webkit-user-drag: none; /* Disable drag */
+        }
+
+        .profile-name-container {
+            text-align: left;
+        }
+
+        .profile-name-container h1 {
+            font-size: 2rem;
+            color: #333;
+        }
+
+        .profile-name-container p {
+            font-size: 0.8rem; /* Smaller text */
+            color: #888; /* Subtle emphasis */
+        }
+
+        .bio-section {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+
+        .bio-section h2 {
+            font-size: 1.8rem;
+            color: #6489EE;
+            margin-bottom: 10px;
+        }
+
+        .bio-section p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .social-links {
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: #0073e6;
+            font-size: 1.2rem;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #005bb5;
+        }
+
+        #typewriter {
+            font-family: 'Courier New', Courier, monospace;
+            color: #0073e6;
+            font-size: 1.5rem;
+            margin-top: 20px;
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            animation: type 5s steps(40) 1s 1 normal both;
+        }
+
+        @keyframes type {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        .footer {
+            margin-top: 20px;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        /* Dark Mode Styles */
+        .dark-mode {
+            background-color: #333;
+            color: white;
+        }
+
+        .dark-mode .profile-container {
+            background-color: #444;
+            color: white;
+        }
+
+        .dark-mode .bio-section {
+            background-color: #555;
+            color: white;
+        }
+
+        .dark-mode h1 {
+            color: #f7f7f7;
+        }
+
+        .dark-mode p,
+        .dark-mode a {
+            color: white;
+        }
+
+        /* Menu Styles */
+        .menu-icon {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+        .menu-dropdown {
+            display: none;
+            position: absolute;
+            top: 30px;
+            left: 0;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .menu-dropdown a {
+            display: block;
+            padding: 8px;
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .menu-dropdown a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .menu-icon.active + .menu-dropdown {
+            display: block;
+        }
+
+        /* Dark Mode Toggle */
+        .dark-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            max-height: 80%;
+            overflow-y: auto;
+        }
+
+        .modal .modal-content {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .modal button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #0073e6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .modal button:hover {
+            background-color: #005bb5;
+        }
+
+        /* Dark Mode for Modal */
+        .dark-mode .modal {
+            background-color: #444;
+            color: white;
+        }
+
+        .dark-mode .modal button {
+            background-color: #0073e6;
+        }
+
+        .dark-mode .modal button:hover {
+            background-color: #005bb5;
+        }
+
+    </style>
+        <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .scrolling-text {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            color: white;
+            font-size: 17px;
+            padding: 1px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+        .scrolling-text span {
+            display: inline-block;
+            animation: scroll-text 10s linear infinite;
+        }
+        @keyframes scroll-text {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+    </style>
+</head>
+<body>
+  <div class="scrolling-text" id="scrollingText">
+    <span></span>
+</div>
+
+<script>
+    const scrollingText = document.getElementById('scrollingText');
+
+    function checkDate() {
+        const today = new Date();
+        const day = today.getDate();
+        const month = today.getMonth() + 1; // January is 0
+
+        // Default hide
+        scrollingText.style.display = 'none';
+
+        if (month === 4 && day === 20) {
+            // Birthday
+            scrollingText.style.display = 'block';
+            scrollingText.innerHTML = '<span>Happy birthday to me 🎉 pa Gcash naman lodi 😸  ✨<09666656662>✨ </09666656662></span>';
+        } else if (month === 12) {
+            if (day === 25 || day === 26 || day === 27) {
+                // Christmas
+                scrollingText.style.display = 'block';
+                scrollingText.innerHTML = '<span>Merry Christmas everyone ❄️ 🎄</span>';
+            } else if (day === 29 || day === 30 || day === 31) {
+                // New Year
+                scrollingText.style.display = 'block';
+                scrollingText.innerHTML = '<span>Happy New Year everyone 🥳 🎉</span>';
+            }
+        }
+    }
+
+    // Check date when the page loads
+    checkDate();
+</script>
+
+
+</head>
+<body>
+    <!-- Menu Icon -->
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+    <div class="menu-dropdown" id="menu-dropdown">
+        <a href="#" onclick="showProjects()">Projects</a>
+        <a href="#" onclick="showChangelog()">Changelog</a>
+    </div>
+
+    <!-- Dark Mode Toggle -->
+    <div class="dark-toggle" onclick="toggleDarkMode()">🌙</div>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <!-- Profile Picture -->
+            <div class="profile-image-container">
+                <img src="https://i.ibb.co/d6Lxns5/images-1.png" alt="images-1">
+            </div>
+
+            <!-- Name and Motto -->
+            <div class="profile-name-container">
+                <h1>NORWELL VALDERAMOS</h1>
+                <p>keep moving, keep dreaming, keep it infinity.</p>
+            </div>
+        </div>
+
+        <!-- Bio Section -->
+        <div class="bio-section">
+            <h2>🌿 About Me</h2>
+            <p>Hi 👋 I'm Norwell. I love to create awesome projects connected to useful tools or crafting a page. I believe in simplicity and code that speaks for itself. Stepping into the world of coding is a never-ending adventure.</p>
+        </div>
+
+        <!-- Social Media Links -->
+        <div class="social-links">
+            <a href="https://github.com" target="_blank">Github</a>
+            <a href="https://mail.google.com/mail/?view=cm&to=kael.official20@gmail.com" target="_blank">Email</a>
+            <a href="tel:+639910664966"> Number</a>
+        </div>
 
         <!-- Typewriter Effect -->
         <div id="typewriter">Code and Create ☕</div>
     </div>
 
-    <!-- Footer -->
-    <div class="footer">
-        <p>© 2025 infinity. All Rights Reserved. To God be the Glory</p>
+    <!-- Changelog Modal -->
+    <div id="changelog-modal" class="modal">
+        <div class="modal-content">
+            <h2>Changelog</h2>
+            <p>Changelog for this site:</p>
+            <ul>
+                <li>📌Initial launch of the profile page</li>
+                <li>📌Added dark mode functionality</li>
+                <li>📌Improved UI and added animations</li>
+                <li>Date: Dec 27, 2024</li>
+            </ul>
+            <button onclick="closeChangelog()">Close</button>
+        </div>
     </div>
 
+    <!-- Footer -->
+    <!-- Footer -->
+<div class="footer">
+    <p>© <span id="current-year"></span> infinity. All Rights Reserved. To God be the Glory</p>
+</div>
+
+<script>
+    // Update footer with the current year
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
+
     <script>
-        // Disable right-click on images
-        document.querySelectorAll('img').forEach(img => {
-            img.addEventListener('contextmenu', event => event.preventDefault());
+        // Toggle menu dropdown
+        function toggleMenu() {
+            document.querySelector('.menu-icon').classList.toggle('active');
+        }
+
+        // Close menu if clicking outside
+        document.addEventListener('click', function(event) {
+            const menuDropdown = document.getElementById('menu-dropdown');
+            const menuIcon = document.querySelector('.menu-icon');
+            if (!menuDropdown.contains(event.target) && !menuIcon.contains(event.target)) {
+                menuDropdown.style.display = 'none';
+            } else {
+                menuDropdown.style.display = 'block';
+            }
+        });
+
+        // Show Projects (stub function)
+        function showProjects() {
+            alert('Still working on it.⌛');
+        }
+
+        // Show Changelog Modal
+        function showChangelog() {
+            document.getElementById('changelog-modal').style.display = 'block';
+        }
+
+        // Close Changelog Modal
+        function closeChangelog() {
+            document.getElementById('changelog-modal').style.display = 'none';
+        }
+
+        // Toggle Dark Mode
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const toggleIcon = document.querySelector('.dark-toggle');
+            toggleIcon.innerHTML = document.body.classList.contains('dark-mode') ? '🌞' : '🌙';
+        }
+
+        // Hide Dark Mode Toggle on scroll and show it when top
+        let lastScrollTop = 0;
+        window.addEventListener("scroll", function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop) {
+                document.querySelector('.dark-toggle').style.display = 'none';
+            } else {
+                document.querySelector('.dark-toggle').style.display = 'block';
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
         });
     </script>
 </body>
 </html>
+
